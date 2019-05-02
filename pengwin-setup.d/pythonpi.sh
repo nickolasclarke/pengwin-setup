@@ -15,28 +15,26 @@ if (whiptail --title "PYTHON" --yesno "Would you like to download and install Py
      	echo "export PATH=\"${HOME}/.pyenv/bin:\$PATH\"" >> ${HOME}/.bashrc
       	echo "eval \"\$(pyenv init -)\"" >> ${HOME}/.bashrc
       	echo "eval \"\$(pyenv virtualenv-init -)\"" >> ${HOME}/.bashrc
-	source ${HOME}/.bashrc
     fi
 
     if [ -f ${HOME}/.zshrc ]; then
     	echo "export PATH=\"${HOME}/.pyenv/bin:\$PATH\"" >> ${HOME}/.zshrc
       	echo "eval \"\$(pyenv init -)\"" >> ${HOME}/.zshrc
       	echo "eval \"\$(pyenv virtualenv-init -)\"" >> ${HOME}/.zshrc
-	source ${HOME}/.zshrc
     fi
 
     if [ -d ${HOME}/.config/fish ]; then
 	echo "set -x PATH \"${HOME}/.pyenv/bin\" \$PATH" >> ${HOME}/.config/fish/config.fish
       	echo 'status --is-interactive; and . (pyenv init -|psub)'  >> ${HOME}/.config/fish/config.fish
       	echo 'status --is-interactive; and . (pyenv virtualenv-init -|psub)' >> ${HOME}/.config/fish/config.fish
-	source ${HOME}/.config/fish/config.fish	
     fi
 
     echo "installing Python 3.7"
-    pyenv install 3.7.3
-    pyenv global 3.7.3
+    ${HOME}/.pyenv/bin/pyenv install 3.7.3
+    ${HOME}/.pyenv/bin/pyenv global 3.7.3
 
     cleantmp
+    echo "installation complete! Restart your bash shell to srart using pyenv."
 
 elif (whiptail --title "PYTHON" --yesno "Would you like to download and install Python 3.7, IDLE, and the pip package manager?" 8 90) then
     echo "Installing PYTHON"
